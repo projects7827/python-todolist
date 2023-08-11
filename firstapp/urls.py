@@ -1,9 +1,10 @@
 from django.urls import path
-from firstapp import views
+from .views import delete,index,add
 
 urlpatterns = [ 
-    path("",views.index,name ="home"),
-    path("/delete",views.delete_record,name ="delete")
+    path("",index,name ="home"),
+    path("delete",delete,name ="delete"),
+    path("add",add,name ="add")
 ]
     
     

@@ -6,10 +6,23 @@ def index(request):
     return render(request,"index.html",{"template_data":template_data})
 
 
-def delete_record(request):
-    print(request.id)
-    id = request.id
-    data = all_tasks.objects.get(id=10)
-    data.delete()
-    return HttpResponse("done")
+def delete(request): # deleting a task or category
+    id_param = request.GET.get("id")
+    if id_param==None:
+        return HttpResponse("Please Mention Id As Query Parameter",status=400)
+    else:
+        data = all_tasks.objects.filter(id=id_param)
+        if not data:
+            return HttpResponse("Item Not Found",status=204)
+        else:
+            data.delete()
+            return HttpResponse("Item Deleted Successfully",status=200)
+          
+
+    
+def add(request): # adding a task or category
+    body = request.body.decode("utf-8")
+    print(body)
+          
+
     
